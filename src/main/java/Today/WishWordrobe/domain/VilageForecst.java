@@ -10,28 +10,27 @@ import javax.persistence.Id;
 @Builder
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class VilageForecst {
 
     //@GeneratedValue()
     @Id
-    private long no;
+    private long id;
     private long baseDate;
     private long fcstDate;
     private long fcstTime;
-    private long x;
-    private long y;
+    private long gridX;
+    private long gridY;
     private String category;
     private String fcstValue;
 
-    public VilageForecst(long no, long baseDate, long fcstDate, long fcstTime, long x, long y, String category, String fcstValue) {
-        this.no = no;
+    public VilageForecst(long id, long baseDate, long fcstDate, long fcstTime, long gridX, long gridY, String category, String fcstValue) {
+        this.id = id;
         this.baseDate = baseDate;
         this.fcstDate = fcstDate;
         this.fcstTime = fcstTime;
-        this.x = x;
-        this.y = y;
+        this.gridX = gridX;
+        this.gridY = gridY;
         this.category = category;
         this.fcstValue = fcstValue;
     }
