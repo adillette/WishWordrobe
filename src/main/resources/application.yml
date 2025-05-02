@@ -27,3 +27,11 @@ logging:
 jwt:
   issuer: wishful@gmail.com
   secret_key: iwish
+
+weather:
+  api:
+    apiKey: "dJ+1bX3L4D5nk3DlGR7hHcEexw5lZK9kOiQYE3SUIEmLH7O/Hd/7TBDEWzgPvqQJbYyWJpgLjR67KsK59dX3ow=="
+    baseUrl: "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0"
+    villageFcstUrl: "/getVilageFcst"
+    ultraSrtFcstUrl: "/getUltraSrtFcst"
+    ultraSrtNcstUrl: "/getUltraSrtNcst"
