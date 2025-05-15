@@ -26,7 +26,7 @@ logging:
 
 jwt:
   issuer: wishful@gmail.com
-
+  secret_key: iwish
 
 weather:
   api:
@@ -35,3 +35,7 @@ weather:
     villageFcstUrl: "/getVilageFcst"
     ultraSrtFcstUrl: "/getUltraSrtFcst"
     ultraSrtNcstUrl: "/getUltraSrtNcst"
+app:
+  webpush:
+    public-key: BP4LfGdxmHwrq-rKtbXnIhtX89V68HGH1BM96mlWWdimEj5M7_ow5gZ6zkbulDJaTdb7lzyCpi35RJJwVl819gI
+    private-key: u3oOxm0mJ_fatc9nLIPupVOQCrMK4uVEH7VJ8cprKpE

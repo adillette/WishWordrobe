@@ -43,6 +43,8 @@ public class WeatherClient {
                 .build()
                 .toUriString();
 
+        log.info("생성된 api url: {}",uri);
+
         return webClient
                 .get()
                 .uri(uri)
@@ -60,7 +62,7 @@ public class WeatherClient {
 
     private Map<String, String> calculateBaseTime() {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyMMdd");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
         int[] baseTimes = {2, 5, 8, 11, 14, 17, 20, 23};
         int hour = now.getHour();
@@ -88,4 +90,7 @@ public class WeatherClient {
         return result;
 
     }
+
+
+
 }

@@ -2,6 +2,7 @@ package Today.WishWordrobe.presentation.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.time.LocalTime;
 
 @Builder
 @Getter
+@Setter
 @ToString
 public class WeatherForecastDTO {
     private Long id;
