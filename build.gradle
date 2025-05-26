@@ -38,6 +38,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.bitbucket.b_c/jose4j
 	implementation 'org.bitbucket.b_c:jose4j:0.9.6'
 
+	// https://mvnrepository.com/artifact/io.lettuce/lettuce-core
+	implementation 'io.lettuce:lettuce-core:6.6.0.RELEASE'
 
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'

@@ -19,6 +19,9 @@ spring:
       enabled: true
       path: /h2-console
 
+  profiles:
+    active: dev
+
 logging:
   level:
     org.hibernate.SQL: debug
@@ -39,3 +42,9 @@ app:
   webpush:
     public-key: BP4LfGdxmHwrq-rKtbXnIhtX89V68HGH1BM96mlWWdimEj5M7_ow5gZ6zkbulDJaTdb7lzyCpi35RJJwVl819gI
     private-key: u3oOxm0mJ_fatc9nLIPupVOQCrMK4uVEH7VJ8cprKpE
+
+wish:
+  local:
+    file:
+      base:
+        directory: "C:/Users/gyeongryun"
