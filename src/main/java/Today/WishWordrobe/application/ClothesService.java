@@ -43,7 +43,7 @@ public class ClothesService {
         return clothesRepository.save(clothes);
     }
 
-    //look aside 방식으로 사용자 옷장을 조회
+    //look aside 방식으로 사용자 옷장을 조회  ★getClothesWithCache자리인데 다르네
     public List<Clothes> getClothesIncident(Long userId, TempRange tempRange, ClothingCategory category){
         //step 1: 캐시에서 데이터를 조회
         ClothesCacheKey cacheKey = ClothesCacheKey.of(userId, tempRange, category);
@@ -56,7 +56,7 @@ public class ClothesService {
             if(cachedValue.getCacheTime().isAfter(LocalDateTime.now().minusHours(1)))
             return convertToClothes(cachedValue.getClothesList());
         }
-        //step2: 캐시에 데이터 없으면 db조회
+        //step2: db에서 조회 후 캐시 저장 // 캐시 미스 또는 만료시 캐시에 데이터 없으면 db조회
         List<Clothes> clothesFromDB;
         if(category!=null){
             clothesFromDB= clothesRepository.findByUserIdAndTempRangeAndCategory(userId, tempRange, category);
@@ -73,8 +73,11 @@ public class ClothesService {
 
     }
 
+    private ClothesCacheValue convertToCacheValue(List<Clothes> clothesFromDB) {
+    }
+
     // Write-Behind 패턴으로 옷장 수정시 캐시 무효화
-    public void invalidateUwerClothesCache(Long userId){
+    public void invalidateUserClothesCache(Long userId){
         //해당 사용자의 모든 옷장 캐시 삭제
         String pattern ="CLOTHES::" + userId +"::*";
         Set<ClothesCacheKey> keys =clothesRedisTemplate.keys(pattern);

@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 
 @Repository
 public interface ClothesRepository extends JpaRepository<Clothes,Long> {
+
     /**
      * 회원이랑 연결하면 쓸것들
      */
@@ -26,5 +27,6 @@ public interface ClothesRepository extends JpaRepository<Clothes,Long> {
      * clothes 관련
      */
 
-
+    List<Clothes> findByUserIdAndTempRangeAndCategory(Long userId, TempRange tempRange, ClothingCategory category);
+    List<Clothes> findbyUserIdAndTempRange(Long userId, TempRange tempRange);
 }

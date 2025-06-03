@@ -8,16 +8,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import io.lettuce.core.ClientOptions;
 import io.lettuce.core.SocketOptions;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.cache.RedisCacheManager;
+
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
+
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -87,15 +86,15 @@ public class CacheConfig {
     public RedisTemplate<ClothesCacheKey, ClothesCacheValue> clothesCacheRedisTemplate(
             RedisConnectionFactory connectionFactory){
 
-        RedisTemplate<ClothesCacheKey, ClothesCacheValue> template = new RedisTemplate<>();
+                RedisTemplate<ClothesCacheKey, ClothesCacheValue> template = new RedisTemplate<>();
 
-        template.setConnectionFactory(connectionFactory);
+                template.setConnectionFactory(connectionFactory);
 
-        template.setKeySerializer(new ClothesCacheKeySerializer());
+                template.setKeySerializer(new ClothesCacheKeySerializer());
 
-        template.setValueSerializer(new ClothesCacheValueSerializer());
+                template.setValueSerializer(new ClothesCacheValueSerializer());
 
-        return template;
+                return template;
 
     }
 
@@ -171,6 +170,9 @@ public class CacheConfig {
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory connectionFactory) {
         StringRedisTemplate template = new StringRedisTemplate();
         template.setConnectionFactory(connectionFactory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new StringRedisSerializer());
+        template.afterPropertiesSet();
         log.info("StringRedisTemplate 생성 완료");
         return template;
     }
