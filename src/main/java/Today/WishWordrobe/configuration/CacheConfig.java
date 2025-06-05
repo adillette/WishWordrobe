@@ -4,6 +4,10 @@ import Today.WishWordrobe.domain.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import io.lettuce.core.ClientOptions;
@@ -18,6 +22,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.net.Socket;
@@ -25,8 +30,16 @@ import java.time.Duration;
 
 @Slf4j
 @Configuration
+@EnableCaching
 public class CacheConfig {
 
+    @Bean
+    public CacheManager cacheManager(){
+        SimpleCacheManager cacheManager = new SimpleCacheManager();
+        cacheManager.setCaches(Arrays.asList
+                (new ConcurrentMapCache("clothesCache")));
+        return cacheManager;
+    }
    @Bean
    public RedisConnectionFactory cacheRedisConnectionFactory0(){
        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration("127.0.0.1", 6379);

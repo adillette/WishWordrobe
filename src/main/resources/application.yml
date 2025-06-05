@@ -1,4 +1,9 @@
 spring:
+  cache:
+    type: ehcache
+    jcache:
+      config: classpath:ehcache.xml
+
   datasource:
     url: jdbc:h2:tcp://localhost/~/wishwardrobe
     username: sa
@@ -21,6 +26,13 @@ spring:
 
   profiles:
     active: dev
+
+
+
+  redis:
+    host: localhost
+    port: 6379
+
 
 logging:
   level:

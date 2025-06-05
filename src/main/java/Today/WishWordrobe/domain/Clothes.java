@@ -3,6 +3,7 @@ package Today.WishWordrobe.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name="clothes")
 @NoArgsConstructor
 @Getter
+@Setter
 public class Clothes {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -37,5 +39,7 @@ public class Clothes {
         this.tempRange = tempRange;
         this.imageUrl = imageUrl;
     }
+
+
 
 }

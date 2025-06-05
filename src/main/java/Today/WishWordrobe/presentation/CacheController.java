@@ -25,30 +25,6 @@ public class CacheController {
     2. 옷장 api 캐시 적용
      */
 
-    @GetMapping("/clothes/recommendations")
-    public ResponseEntity<List<Clothes>> getRecommendedClothes(
-            @RequestParam Long userId,
-            @RequestParam int temperature,
-            @RequestParam(required = false)ClothingCategory category  ){
-        log.info("옷 추천 요청(캐시 포함) : userId={} , temp={},category={}",userId, temperature, category);
-
-        TempRange tempRange = TempRange.fromTemperature(temperature); //온도를 범위로 변경
-        List<Clothes> clothes = clothesService.getClothesWithCaches(userId, tempRange, category);
-
-        return ResponseEntity.ok(clothes);
-    }
-
-    @PostMapping("/clothes")
-    public ResponseEntity<Clothes> addClothes(@RequestBody Clothes clothes){
-        //옷 저장 로직
-        Clothes savedClothes = clothesService.save(clothes);
-
-        //해당 사용자의 옷장 캐시 무효화
-        clothesService.invalidateUserClothesCache(clothes.getUserId());
-
-        log.info("새옷 추가 및 캐시 무효화 완료: userId={}" ,clothes.getUserId());
-        return ResponseEntity.ok(savedClothes);
-    }
 
 
 }
