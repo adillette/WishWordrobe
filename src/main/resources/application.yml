@@ -1,4 +1,14 @@
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      location: D:/uploadFiles
+      max-file-size: 200MB
+      max-request-size: 215MB
+
+  file:
+    uploadDir: D:/uploadFiles/
   cache:
     type: ehcache
     jcache:

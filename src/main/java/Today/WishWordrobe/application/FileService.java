@@ -1,47 +1,74 @@
 package Today.WishWordrobe.application;
 
+import Today.WishWordrobe.domain.ClothesImage;
 import Today.WishWordrobe.domain.ClothesImageUploadInfo;
 import Today.WishWordrobe.domain.FileInfo;
 import Today.WishWordrobe.domain.FileUtil;
+import Today.WishWordrobe.exception.FileDeleteException;
+import Today.WishWordrobe.exception.FileUploadException;
+import Today.WishWordrobe.infrastructure.ClothesRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.springframework.beans.factory.annotation.Value;
+
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 
 @Service
 @RequiredArgsConstructor
-@Profile("dev")
+//@Profile("dev")
 public class FileService {
 
-    @Value("${wish.local.file.base.directory:./clothesUploads}")
-    private  String baseDir;
+    private final ClothesRepository clothesRepository;
 
-    public FileInfo uploadFile(MultipartFile file, String userId) 
-                throws FileUploadException{
+    @Value("${file.uploadFiles}")
+    private  String fileDir;
+
+    /*
+    실제 로컬에 저장하는 uploadFile 메서드
+     */
+    public FileInfo uploadFile(MultipartFile file, Long userId)
+                throws FileUploadException {
         
         String newFileName = FileUtil.changeFileName(file);
         
         checkDirectory(userId);
 
-        return createFileInfo(file, userId, newFileName);
-    }
+        FileInfo fileInfo = createFileInfo(file,userId,newFileName);
 
-    public List<FileInfo> uploadFiles(List<MultipartFile> files,
-                                      String userId) throws FileUploadException{
+        clothesRepository.saveFilePath(
+                fileInfo.getFileName()
+                ,fileInfo.getFilePath()
+                ,userId);
+
+        return fileInfo;
+    }
+    /*
+     실제 로컬에 저장하는 uploadFiles 여러개 저장 메서드
+     */
+    public List<FileInfo> uploadFiles(
+            List<MultipartFile> files, Long userId) throws Today.WishWordrobe.exception.FileUploadException {
         HashMap<String, String> newFileNames = FileUtil.changeFileNames(files);
 
         checkDirectory(userId);
 
         List<FileInfo> fileInfos = files.stream()
-                .map(file-> createFileInfo(file,userId,newFileNames.get(file.getOriginalFilename())))
+                .map(file-> createFileInfo(
+                                file,userId,newFileNames.get(file.getOriginalFilename())))
                 .collect(Collectors.toList());
+
+        clothesRepository.saveFilePathes(fileInfos,userId);
+
         return fileInfos;
 
     }
@@ -49,31 +76,36 @@ public class FileService {
     public void uploadImage(Long id, FileInfo fileInfo){
         ClothesImageUploadInfo imageUploadInfo =
                 FileUtil.toImageUploadInfo(id,fileInfo,1);
-        fileMapper.insertImage(imageUploadInfo);
+        clothesRepository.saveImage(
+                imageUploadInfo.getId(),
+                imageUploadInfo.getImagePath(),
+                imageUploadInfo.getImageName(),
+                imageUploadInfo.getSeq()
+        );
     }
 
     public void uploadImages(Long id, List<FileInfo> fileInfos){
         List<ClothesImageUploadInfo> imageUploadInfos = fileInfos.stream()
                 .map(info -> FileUtil.toImageUploadInfo(id, info,fileInfos.indexOf(info)+1 ))
                 .collect(Collectors.toList());
-        fileMapper.insertImages(imageUploadInfos);
+        clothesRepository.uploadImages(imageUploadInfos);
     }
 
-    @Override
+
     @Transactional(readOnly = true)
-    public boolean isExistImages(int postId) {
+    public boolean isExistImages(Long clothesId) {
 
-        return fileMapper.isExistImages(postId);
+        return clothesRepository.isExistImages(clothesId);
     }
 
-    @Override
+
     @Transactional(readOnly = true)
-    public List<Image> getImages(int postId) {
+    public List<ClothesImageUploadInfo> getImages(Long clothesId) {
 
-        return fileMapper.getImages(postId);
+        return clothesRepository.getImages(clothesId);
     }
 
-    @Override
+
     public void deleteFile(String filePath) {
 
         if (filePath != null) {
@@ -81,11 +113,14 @@ public class FileService {
         }
     }
 
-    @Override
-    public void deleteDirectory(String userId) throws FileDeleteException {
+
+    /*
+    디렉토리 삭제하기 이게 userId안에 들어있는 파일일거임 이거 해결은 어떻게 할지 고민해야함
+     */
+    public void deleteDirectory(Long userId) throws FileDeleteException {
 
         StringBuilder dirPath = new StringBuilder()
-                .append(baseDir)
+                .append(fileDir)
                 .append(File.separator)
                 .append(userId);
 
@@ -94,21 +129,22 @@ public class FileService {
         if (!isSuccess) {
             throw new FileDeleteException("파일을 삭제하는데 실패하였습니다.");
         }
+        clothesRepository.deleteFilesByUserId(userId);
     }
 
-    @Override
-    public void deleteImages(int postId) {
-        List<String> imagePaths = fileMapper.getImagePaths(postId);
+
+    public void deleteImages(Long clothesId) {
+        List<String> imagePaths = clothesRepository.getImagePaths(clothesId);
 
         imagePaths.stream().forEach(this::deleteFile);
 
-        fileMapper.deleteImages(postId);
+        clothesRepository.deleteImages(clothesId);
     }
 
-    private void checkDirectory(String userId) {
+    private void checkDirectory(Long userId) {
 
         StringBuilder dirPath = new StringBuilder()
-                .append(baseDir)
+                .append(fileDir)
                 .append(File.separator)
                 .append(userId);
 
@@ -118,20 +154,25 @@ public class FileService {
             directory.mkdir();
         }
     }
-
-
-    private void checkDirectory(String userId) {
-        StringBuilder dirPath = new StringBuilder()
-                .append(baseDir)
+private FileInfo createFileInfo(MultipartFile file, Long userId, String newFileName) throws FileUploadException{
+        StringBuilder filePath = new StringBuilder()
+                .append(fileDir)
                 .append(File.separator)
-                .append(userId);
+                .append(userId)
+                .append(File.separator)
+                .append(newFileName);
 
-        File directory = new File(String.valueOf(dirPath));
+        try{
+            file.transferTo(new File(String.valueOf(filePath)));
+            FileInfo fileInfo = new FileInfo(newFileName, String.valueOf(filePath));
 
-        if(!directory.exists()){
-            directory.mkdir();
+            return fileInfo;
+        } catch (IOException e) {
+            throw new FileUploadException("파일 업로드하는데 실패하였습니다.",e);
         }
-    }
+}
+
+
 
 
 }

@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -15,7 +16,7 @@ import javax.persistence.*;
 public class Clothes {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long clothesId;
 
     @Column(name="user_id")
     private Long userId;
@@ -31,13 +32,16 @@ public class Clothes {
 
     private String imageUrl;
 
+    private MultipartFile clothesImage;
+
     @Builder
-    public Clothes(Long userId, String name, ClothingCategory category, TempRange tempRange,String imageUrl){
+    public Clothes(Long userId, String name, ClothingCategory category, TempRange tempRange,String imageUrl, MultipartFile clothesImage){
         this.userId = userId;
         this.name = name;
         this.category = category;
         this.tempRange = tempRange;
         this.imageUrl = imageUrl;
+        this.clothesImage = clothesImage;
     }
 
 

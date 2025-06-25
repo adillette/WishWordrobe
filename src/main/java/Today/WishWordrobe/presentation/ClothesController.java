@@ -2,22 +2,18 @@ package Today.WishWordrobe.presentation;
 
 import Today.WishWordrobe.ResourceNotFoundException2;
 import Today.WishWordrobe.application.ClothesService;
+import Today.WishWordrobe.application.FileService;
 import Today.WishWordrobe.domain.Clothes;
 import Today.WishWordrobe.domain.ClothingCategory;
 import Today.WishWordrobe.domain.TempRange;
-import Today.WishWordrobe.domain.User;
-import Today.WishWordrobe.infrastructure.ClothesRepository;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+import java.util.List;
 import javax.validation.Valid;
 
 @Slf4j
@@ -25,16 +21,23 @@ import javax.validation.Valid;
 @RequestMapping(value="/wishwardrobe")
 public class ClothesController{//아래 setter 바꿔야한다
 
+    @Value("${file.uploadFiles}")
+    private  String fileDir;
+
+    private final FileService fileService;
+
    // private final ClothesRepository clothesRepository;
     private final ClothesService clothesService;
 
-    public ClothesController(ClothesService clothesService) {
+    public ClothesController(FileService fileService, ClothesService clothesService) {
+        this.fileService = fileService;
         this.clothesService = clothesService;
     }
 
     /*
      ★★ 추천★★★
      */
+
 
     @GetMapping("/recommendations")
     public ResponseEntity<List<Clothes>> getRecommendedClothes(
@@ -88,7 +91,7 @@ public class ClothesController{//아래 setter 바꿔야한다
     */
     @GetMapping
     public String getAllClothes(Model model){
-        List<Clothes> clothesList =  clothesService.findAll();
+        List<Clothes> clothesList = clothesService.findAll();
         model.addAttribute("clothesList", clothesList);//뷰(HTML 템플릿)에서는 이 이름(clothesList)으로 데이터에 접근
         return "clothes/list";
     }
