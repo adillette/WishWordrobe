@@ -8,8 +8,6 @@ import java.util.Objects;
 import java.time.LocalDate;
 
 @Getter
-@ToString
-@EqualsAndHashCode
 public class WeatherCacheKey {
 
     private static final String PREFIX="WEATHER::";

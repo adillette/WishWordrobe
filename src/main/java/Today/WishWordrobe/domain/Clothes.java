@@ -32,6 +32,7 @@ public class Clothes {
 
     private String imageUrl;
 
+    //이거 필요한지 체크해서 없애야할지 고민할것
     private MultipartFile clothesImage;
 
     @Builder
@@ -43,7 +44,6 @@ public class Clothes {
         this.imageUrl = imageUrl;
         this.clothesImage = clothesImage;
     }
-
 
 
 }

@@ -15,7 +15,7 @@ spring:
       config: classpath:encache.xml
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/wishwordrobe
+    url: jdbc:h2:mem:wishwordrobe
     username: sa
     password:
     driver-class-name: org.h2.Driver

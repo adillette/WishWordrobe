@@ -43,13 +43,13 @@ class ClothesControllerTest {
         Clothes clothes = createClothes();
         //when
         ResultActions resultActions = mockMvc.perform(
-                post("/wishwardrobe/add")
+                post("/wishwordrobe/add")
                         .flashAttr("clothes",clothes)
         );
         //then
         resultActions
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/wishwardrobe"));
+                .andExpect(redirectedUrl("/wishwordrobe"));
         verify(clothesService,times(1)).save(any(Clothes.class));
     }
 

@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
-@RequestMapping(value="/wishwardrobe")
+@RequestMapping(value="/wishwordrobe")
 public class ClothesController{//아래 setter 바꿔야한다
 
     @Value("${file.uploadFiles}")
@@ -65,12 +65,13 @@ public class ClothesController{//아래 setter 바꿔야한다
 
     /*
     userid로 업데이트
+    clothes 엔티티 id값 -> 6/25 clothesId로 변경함
      */
     @PostMapping
     public ResponseEntity<Clothes> updateClothes(
-            @PathVariable Long id,
+            @PathVariable Long clothesId,
             @RequestBody Clothes clothes){
-        clothes.setId(id);
+        clothes.setClothesId(clothesId);
         Clothes updatedClothes = clothesService.update(clothes);
 
         return ResponseEntity.ok(updatedClothes);
@@ -79,9 +80,9 @@ public class ClothesController{//아래 setter 바꿔야한다
     /*
     해당 id 내용 삭제
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        clothesService.deleteById(id);
+    @DeleteMapping("/{clothesId}")
+    public ResponseEntity<Void> delete(@PathVariable Long clothesId){
+        clothesService.deleteById(clothesId);
         return ResponseEntity.ok().build();
     }
 
@@ -114,7 +115,7 @@ public class ClothesController{//아래 setter 바꿔야한다
             return "clothes/addForm";
         }
         clothesService.save(clothes);//저장
-        return "redirect:/wishwardrobe";
+        return "redirect:/wishwordrobe";
     }
 
     /*
@@ -136,13 +137,13 @@ public class ClothesController{//아래 setter 바꿔야한다
         Clothes existClothes = clothesRepository.findById(clothesId)
                         .orElseThrow(()-> new ResourceNotFoundException2("Clothes not found"))
         clothesRepository.update(clothesId, clothes);
-        return "redirect:/wishwardrobe/{clothesId}";
+        return "redirect:/wishwordrobe/{clothesId}";
     }
     // 삭제 처리
     @PostMapping("/{clothesId}/delete")
     public String deleteClothes(@PathVariable Long clothesId) {
         clothesRepository.deleteById(clothesId);
-        return "redirect:/wishwardrobe";
+        return "redirect:/wishwordrobe";
     }
     //옷 상세페이지
     @GetMapping("/{clothesId}")

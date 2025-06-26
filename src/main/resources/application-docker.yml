@@ -1,7 +1,7 @@
 spring:
-  #데이터베이스 설정 이부분 아직 오라클이 안들어갔네 어떻게 할지 찾아보기
+  
   datasource:
-    url: jdbc:h2:tcp://h2-database:1521/~/wishwordrobe
+    url: jdbc:h2:mem:wishwordrobe
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -9,7 +9,7 @@ spring:
   #JPA 설정
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         show_sql: true
@@ -37,7 +37,7 @@ spring:
       Today.WishWordrobe: debug
 
     file:
-      name: /app/logs/wishwardrobe.log
+      name: /app/logs/wishrobe.log
 
   #jwt 설정
   jwt:

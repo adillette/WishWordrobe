@@ -26,6 +26,9 @@ repositories {
 
 
 dependencies {
+
+
+	implementation 'com.oracle.database.jdbc:ojdbc11'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -64,6 +67,8 @@ dependencies {
 	implementation 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+
 
 }
 

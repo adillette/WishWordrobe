@@ -7,8 +7,6 @@ import lombok.ToString;
 import java.util.Objects;
 
 @Getter
-@ToString
-@EqualsAndHashCode
 public class ClothesCacheKey {
 
     private static final String PREFIX= "CLOTHES::";

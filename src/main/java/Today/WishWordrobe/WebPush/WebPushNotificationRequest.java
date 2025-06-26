@@ -4,7 +4,7 @@ import Today.WishWordrobe.presentation.dto.PushNotificationRequest;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import Map;
+import java.util.Map;
 
 
 @Getter
