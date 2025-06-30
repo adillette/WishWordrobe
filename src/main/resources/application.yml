@@ -34,6 +34,28 @@ spring:
       enabled: true
       path: /h2-console
 
+  config:
+    activate:
+      on-profile: oracle
+
+    datasource:
+     url: jdbc:oracle:thin:@localhost:1521:orcl
+     username: wish
+     password: a123
+     driver-class-name: oracle.jdbc.OracleDriver
+
+    jpa:
+     hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.Oracle19cDialect
+
+    data:
+      mongodb:
+        uri: mongodb://localhost:27017/wishwordrobe
+
+
+
+
   profiles:
     active: dev
 
@@ -70,3 +92,5 @@ wish:
     file:
       base:
         directory: "C:/Users/gyeongryun"
+
+

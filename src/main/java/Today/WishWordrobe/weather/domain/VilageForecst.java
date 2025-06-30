@@ -1,9 +1,8 @@
-package Today.WishWordrobe.domain;
+package Today.WishWordrobe.weather.domain;
 
 import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name="vilageforecast")

@@ -1,12 +1,12 @@
-package Today.WishWordrobe.infrastructure;
+package Today.WishWordrobe.weather.infrastructure;
 
-import Today.WishWordrobe.domain.Geographic;
+import Today.WishWordrobe.weather.domain.Geographic;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-public class GeographicRepository {
+//extends ReactiveMongoRepository<Geographic,Long>
+public class GeographicRepository  {
 
     private final Map<String, Geographic> locationCache = new ConcurrentHashMap<>();
 
@@ -26,6 +26,7 @@ public class GeographicRepository {
     캐시에 저장
      */
     public void cache(String locationName, Geographic geographic){
+
         locationCache.put(locationName,geographic);
     }
 

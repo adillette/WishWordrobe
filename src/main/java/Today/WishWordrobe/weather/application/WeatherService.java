@@ -1,9 +1,8 @@
-package Today.WishWordrobe.application;
+package Today.WishWordrobe.weather.application;
 
-import Today.WishWordrobe.domain.Geographic;
-import Today.WishWordrobe.infrastructure.WeatherClient;
 import Today.WishWordrobe.presentation.dto.VillageForecastResponse;
 import Today.WishWordrobe.presentation.dto.WeatherForecastDTO;
+import Today.WishWordrobe.weather.domain.Geographic;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

@@ -1,20 +1,14 @@
 package Today.WishWordrobe.application;
 
-import Today.WishWordrobe.ResourceNotFoundException2;
 import Today.WishWordrobe.domain.*;
 import Today.WishWordrobe.infrastructure.ClothesRepository;
-import Today.WishWordrobe.presentation.dto.ClothesDto;
-import lombok.NoArgsConstructor;
+import Today.WishWordrobe.weather.domain.TempRange;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import javax.transaction.Transactional;
-import java.time.Duration;
-import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Service

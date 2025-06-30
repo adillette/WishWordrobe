@@ -1,5 +1,6 @@
 package Today.WishWordrobe.domain;
 
+import Today.WishWordrobe.weather.domain.TempRange;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

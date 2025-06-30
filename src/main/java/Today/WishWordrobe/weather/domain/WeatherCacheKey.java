@@ -1,8 +1,6 @@
-package Today.WishWordrobe.domain;
+package Today.WishWordrobe.weather.domain;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.util.Objects;
 import java.time.LocalDate;

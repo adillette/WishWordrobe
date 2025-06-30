@@ -1,7 +1,7 @@
 package Today.WishWordrobe.presentation.dto;
 
 import Today.WishWordrobe.domain.ClothingCategory;
-import Today.WishWordrobe.domain.TempRange;
+import Today.WishWordrobe.weather.domain.TempRange;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

@@ -1,8 +1,8 @@
-package Today.WishWordrobe.infrastructure;
+package Today.WishWordrobe.weather.application;
 
-import Today.WishWordrobe.configuration.WeatherConfig;
-import Today.WishWordrobe.domain.Geographic;
 import Today.WishWordrobe.presentation.dto.VillageForecastResponse;
+import Today.WishWordrobe.weather.configuration.WeatherConfig;
+import Today.WishWordrobe.weather.domain.Geographic;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @Component

@@ -1,7 +1,7 @@
-package Today.WishWordrobe.presentation;
+package Today.WishWordrobe.weather.presentaion;
 
-import Today.WishWordrobe.application.WeatherService;
 import Today.WishWordrobe.presentation.dto.WeatherForecastDTO;
+import Today.WishWordrobe.weather.application.WeatherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

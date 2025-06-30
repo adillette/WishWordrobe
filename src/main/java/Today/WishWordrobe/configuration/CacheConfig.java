@@ -1,9 +1,11 @@
 package Today.WishWordrobe.configuration;
 
 import Today.WishWordrobe.domain.*;
+import Today.WishWordrobe.weather.domain.WeatherCacheKey;
+import Today.WishWordrobe.weather.domain.WeatherCacheKeySerializer;
+import Today.WishWordrobe.weather.domain.WeatherCacheValue;
+import Today.WishWordrobe.weather.domain.WeatherCacheValueSerializer;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
@@ -23,9 +25,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.net.Socket;
 import java.time.Duration;
 
 @Slf4j

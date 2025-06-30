@@ -1,4 +1,4 @@
-package Today.WishWordrobe.domain;
+package Today.WishWordrobe.weather.domain;
 
 public enum TempRange {
     VERY_HOT(28, 50),    // 민소매, 반팔, 반바지, 원피스

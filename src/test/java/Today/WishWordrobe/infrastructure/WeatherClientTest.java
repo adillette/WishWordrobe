@@ -1,7 +1,8 @@
 package Today.WishWordrobe.infrastructure;
 
-import Today.WishWordrobe.configuration.WeatherConfig;
-import Today.WishWordrobe.domain.Geographic;
+import Today.WishWordrobe.weather.application.WeatherClient;
+import Today.WishWordrobe.weather.configuration.WeatherConfig;
+import Today.WishWordrobe.weather.domain.Geographic;
 import Today.WishWordrobe.presentation.dto.VillageForecastResponse;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;

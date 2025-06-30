@@ -1,4 +1,4 @@
-package Today.WishWordrobe.domain;
+package Today.WishWordrobe.weather.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.serializer.RedisSerializer;

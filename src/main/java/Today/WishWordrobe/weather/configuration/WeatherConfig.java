@@ -1,4 +1,4 @@
-package Today.WishWordrobe.configuration;
+package Today.WishWordrobe.weather.configuration;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,10 +8,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
-
-
-
-import static java.net.http.HttpHeaders.*;
 
 @Configuration
 @Getter

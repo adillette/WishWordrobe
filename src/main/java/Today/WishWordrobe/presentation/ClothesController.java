@@ -1,11 +1,10 @@
 package Today.WishWordrobe.presentation;
 
-import Today.WishWordrobe.ResourceNotFoundException2;
 import Today.WishWordrobe.application.ClothesService;
 import Today.WishWordrobe.application.FileService;
 import Today.WishWordrobe.domain.Clothes;
 import Today.WishWordrobe.domain.ClothingCategory;
-import Today.WishWordrobe.domain.TempRange;
+import Today.WishWordrobe.weather.domain.TempRange;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;

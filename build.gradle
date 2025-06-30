@@ -28,7 +28,7 @@ repositories {
 dependencies {
 
 
-	implementation 'com.oracle.database.jdbc:ojdbc11'
+	//implementation 'com.oracle.database.jdbc:ojdbc11'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
