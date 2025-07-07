@@ -1,8 +1,9 @@
 package Today.WishWordrobe.presentation;
 
-import Today.WishWordrobe.application.ClothesService;
-import Today.WishWordrobe.domain.Clothes;
-import Today.WishWordrobe.domain.ClothingCategory;
+import Today.WishWordrobe.clothes.application.ClothesService;
+import Today.WishWordrobe.clothes.domain.Clothes;
+import Today.WishWordrobe.clothes.domain.ClothingCategory;
+import Today.WishWordrobe.clothes.presentation.ClothesController;
 import Today.WishWordrobe.weather.domain.TempRange;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

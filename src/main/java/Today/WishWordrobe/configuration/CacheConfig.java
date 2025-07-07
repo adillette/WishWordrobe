@@ -1,10 +1,10 @@
 package Today.WishWordrobe.configuration;
 
 import Today.WishWordrobe.domain.*;
-import Today.WishWordrobe.weather.domain.WeatherCacheKey;
-import Today.WishWordrobe.weather.domain.WeatherCacheKeySerializer;
-import Today.WishWordrobe.weather.domain.WeatherCacheValue;
-import Today.WishWordrobe.weather.domain.WeatherCacheValueSerializer;
+import Today.WishWordrobe.domain.WeatherCacheKey;
+import Today.WishWordrobe.domain.WeatherCacheKeySerializer;
+import Today.WishWordrobe.domain.WeatherCacheValue;
+import Today.WishWordrobe.domain.WeatherCacheValueSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

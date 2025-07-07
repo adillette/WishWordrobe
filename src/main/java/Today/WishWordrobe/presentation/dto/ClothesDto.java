@@ -1,6 +1,6 @@
 package Today.WishWordrobe.presentation.dto;
 
-import Today.WishWordrobe.domain.ClothingCategory;
+import Today.WishWordrobe.clothes.domain.ClothingCategory;
 import Today.WishWordrobe.weather.domain.TempRange;
 import lombok.Data;
 

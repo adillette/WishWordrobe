@@ -1,5 +1,6 @@
 package Today.WishWordrobe.domain;
 
+import Today.WishWordrobe.clothes.domain.ClothesInfo;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

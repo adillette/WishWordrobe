@@ -1,12 +1,13 @@
 package Today.WishWordrobe.weather.domain;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name="geographic_coordinate")
+@Document
 @Builder
 @Getter
 @NoArgsConstructor

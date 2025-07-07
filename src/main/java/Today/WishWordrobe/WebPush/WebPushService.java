@@ -1,6 +1,6 @@
 package Today.WishWordrobe.WebPush;
 
-import Today.WishWordrobe.presentation.dto.PushNotificationRequest;
+
 
 import nl.martijndwars.webpush.Notification;
 import nl.martijndwars.webpush.PushService;

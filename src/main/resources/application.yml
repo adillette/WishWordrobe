@@ -51,13 +51,7 @@ spring:
 
     data:
       mongodb:
-        uri: mongodb://localhost:27017/wishwordrobe
-
-
-
-
-  profiles:
-    active: dev
+        uri: mongodb://localhost:27017/wishweather
 
 
 

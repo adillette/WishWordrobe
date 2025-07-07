@@ -1,6 +1,6 @@
 package Today.WishWordrobe.presentation;
 
-import Today.WishWordrobe.application.ClothesService;
+import Today.WishWordrobe.clothes.application.ClothesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

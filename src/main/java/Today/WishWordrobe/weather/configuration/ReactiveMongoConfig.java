@@ -1,5 +1,6 @@
 package Today.WishWordrobe.weather.configuration;
 
+import com.google.api.client.util.Value;
 import com.mongodb.reactivestreams.client.MongoClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,10 +14,13 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 )
 public class ReactiveMongoConfig  {
 
+    @Value("${spring.data.mongodb.uri}")
+    private String mongoUri;
+
     @Bean
     public ReactiveMongoTemplate reactiveMongoTemplate(){
         return new ReactiveMongoTemplate(
-                MongoClients.create("mongodb://localhost:27017"),
+                MongoClients.create(mongoUri),
                 "wishweather"
         );
     }
