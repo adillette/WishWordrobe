@@ -10,29 +10,52 @@
 - 옷차림 based by  내 옷장에 들어있는 옷 알려준다
 - 추천 옷차림 ai 있는지 확인
 
+# 프로젝트 개요
+- 1인 프로젝트
+- MSA를 활용해서 개별 프로그램이 유기적으로 움직이는 프로그램 지향,
 
+- 개별 사용자별 옷장 서비스 제공, 날씨 정보를 출근 시간에
 
+  사용자 위치 적용하여 현재 기온~ 오늘의 최고 기온, 오늘 출근에 입을 내 옷장 안의 옷을 추천받도록 한다.
 
+# 기술 스택
+![java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![oracle](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=black)
+![mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![redis](https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white)
+![docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
+# 주요 기능
+- 알림서비스
+- 옷장서비스
+- 로그인 서비스
+- 날씨 서비스
 
-#250506 이슈
-날씨 api 컨트롤러 흐름
+# 결과 및 성과
 
-1.클라이언트에서 행정구역명(예: "역삼2동")을 파라미터로 컨트롤러에 요청을 보냅니다.
-2. 컨트롤러는 findGeographicByLocationName 메서드를 호출하여:
+-실시간 위치 기반 정보 제공을 위한 카카오맵 API와 기상청 공공 API 연동
 
-JSON 파일(MongoDB에 저장된 파일 또는 static 폴더에 있는 파일)에서 지역 정보를 찾습니다.
-ObjectMapper를 사용하여 JSON 파일을 파싱합니다.
-입력받은 지역명과 일치하는 행정구역을 찾아 Geographic 객체를 생성하여 반환합니다.
-일치하는 지역이 없을 경우 null을 반환합니다 (이게 마지막 return null의 이유입니다. 모든 지역을 검색했지만 일치하는 것이 없을 때 null을 반환).
+- FCM을 통한 푸시 알림 서비스 설계
+  
+		- 브라우저 환경 푸시 알림 처리, Service Worker 활용
+  
+		- Redis 기반 디바이스 토큰 관리 및 알림 발송 이력 관리
+  
+- 서비스 특성에 맞는 Redis 캐싱 패턴 설계 및 적용
+  
+		- 조회 빈도가 높은 데이터 Look-aside패턴 조회 성능 최적화
+  
+		- 업데이트 많은 데이터 Write-back패턴 쓰기 성능 최적화
+  
+		- 각 서비스별 독립적 캐시 관리에 Redis 활용
+  
+- 동기식/비동기식 DB의 Configuration 분리, 멀티 데이터베이스 운영
+  
+- WebFlux 사용하여 시스템 확장성 구현
 
+- 단위테스트로 안정적인 코드베이스 유지
+  
+- 비동기 메시징 아키텍처 구축, RabbitMQ Exchange 활용
 
-3.컨트롤러는 찾은 Geographic 객체의 격자 좌표(nx, ny)를 사용하여 WeatherClient를 통해 기상청 API에 요청을 보냅니다.
-4.기상청 API가 응답(VillageForecastResponse)을 반환하면:
-
-convertToWeatherForecastDTO 메서드를 사용하여 API 응답을 WeatherForecastDTO로 변환합니다.
-5.카테고리별로 날씨 정보(온도, 습도, 강수확률 등)를 분류하고 필요한 변환을 수행합니다.
-날짜와 시간 형식을 적절히 변환합니다.
-
-
-6.최종적으로 WeatherForecastDTO를 JSON 형태로 클라이언트에 반환합니다.
