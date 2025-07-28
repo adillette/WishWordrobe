@@ -29,39 +29,39 @@ spring:
     host: redis #docker 서비스 이름 사용
     port: 6379
 
-  #로깅 설정
-  logging:
-    level:
-      org.hibernate.SQL: debug
-      org.hibernate.type: trace
-      Today.WishWordrobe: debug
+#로깅 설정
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+    Today.WishWordrobe: debug
 
+  file:
+    name: /app/logs/wishrobe.log
+
+#jwt 설정
+jwt:
+  issuer: wishful@gmail.com
+  secret_key: iwish
+
+#기상청 API 설정
+weather:
+  api:
+    apiKey: ${WEATHER_API_KEY}
+    baseUrl: "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0"
+    villageFcstUrl: "/getVilageFcst"
+    ultraSrtFcstUrl: "/getUltraSrtFcst"
+    ultraSrtNcstUrl: "/getUltraSrtNcst"
+
+# Web Push 설정
+app:
+  webpush:
+    public-key: BP4LfGdxmHwrq-rKtbXnIhtX89V68HGH1BM96mlWWdimEj5M7_ow5gZ6zkbulDJaTdb7lzyCpi35RJJwVl819gI
+    private-key: u3oOxm0mJ_fatc9nLIPupVOQCrMK4uVEH7VJ8cprKpE
+
+# 파일 업로드 설정
+wish:
+  local:
     file:
-      name: /app/logs/wishrobe.log
-
-  #jwt 설정
-  jwt:
-    issuer: wishful@gmail.com
-    secret_key: iwish
-
-  #기상청 API 설정
-  weather:
-    api:
-      apiKey: ${WEATHER_API_KEY}
-      baseUrl: "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0"
-      villageFcstUrl: "/getVilageFcst"
-      ultraSrtFcstUrl: "/getUltraSrtFcst"
-      ultraSrtNcstUrl: "/getUltraSrtNcst"
-
-  # Web Push 설정
-  app:
-    webpush:
-      public-key: BP4LfGdxmHwrq-rKtbXnIhtX89V68HGH1BM96mlWWdimEj5M7_ow5gZ6zkbulDJaTdb7lzyCpi35RJJwVl819gI
-      private-key: u3oOxm0mJ_fatc9nLIPupVOQCrMK4uVEH7VJ8cprKpE
-
-  # 파일 업로드 설정
-  wish:
-    local:
-      file:
-        base:
-          directory: /app/uploads
+      base:
+        directory: /app/uploads

@@ -34,6 +34,39 @@ spring:
       enabled: true
       path: /h2-console
 
+  redis:
+    host: localhost
+    port: 6379
+
+
+  logging:
+    level:
+      org.hibernate.SQL: debug
+      org.hibernate.type: trace
+
+  jwt:
+    issuer: wishful@gmail.com
+    secret_key: iwish
+
+  weather:
+    api:
+      apiKey: "dJ+1bX3L4D5nk3DlGR7hHcEexw5lZK9kOiQYE3SUIEmLH7O/Hd/7TBDEWzgPvqQJbYyWJpgLjR67KsK59dX3ow=="
+      baseUrl: "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0"
+      villageFcstUrl: "/getVilageFcst"
+      ultraSrtFcstUrl: "/getUltraSrtFcst"
+      ultraSrtNcstUrl: "/getUltraSrtNcst"
+  app:
+    webpush:
+      public-key: BP4LfGdxmHwrq-rKtbXnIhtX89V68HGH1BM96mlWWdimEj5M7_ow5gZ6zkbulDJaTdb7lzyCpi35RJJwVl819gI
+      private-key: u3oOxm0mJ_fatc9nLIPupVOQCrMK4uVEH7VJ8cprKpE
+
+  wish:
+    local:
+      file:
+        base:
+          directory: "C:/Users/gyeongryun"
+---
+spring:
   config:
     activate:
       on-profile: oracle
@@ -55,36 +88,6 @@ spring:
 
 
 
-  redis:
-    host: localhost
-    port: 6379
 
-
-logging:
-  level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
-
-jwt:
-  issuer: wishful@gmail.com
-  secret_key: iwish
-
-weather:
-  api:
-    apiKey: "dJ+1bX3L4D5nk3DlGR7hHcEexw5lZK9kOiQYE3SUIEmLH7O/Hd/7TBDEWzgPvqQJbYyWJpgLjR67KsK59dX3ow=="
-    baseUrl: "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0"
-    villageFcstUrl: "/getVilageFcst"
-    ultraSrtFcstUrl: "/getUltraSrtFcst"
-    ultraSrtNcstUrl: "/getUltraSrtNcst"
-app:
-  webpush:
-    public-key: BP4LfGdxmHwrq-rKtbXnIhtX89V68HGH1BM96mlWWdimEj5M7_ow5gZ6zkbulDJaTdb7lzyCpi35RJJwVl819gI
-    private-key: u3oOxm0mJ_fatc9nLIPupVOQCrMK4uVEH7VJ8cprKpE
-
-wish:
-  local:
-    file:
-      base:
-        directory: "C:/Users/gyeongryun"
 
 
